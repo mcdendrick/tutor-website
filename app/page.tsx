@@ -94,7 +94,7 @@ export default function Home() {
                 transition={{ delay: 0.6, duration: 0.8 }}
               >
                 <a 
-                  href="#contact" 
+                  href="#pricing" 
                   className="inline-flex items-center px-8 py-3 text-lg font-semibold text-blue-900 bg-white rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ease-out"
                 >
                   Book Your Session
