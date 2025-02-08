@@ -433,7 +433,7 @@ export default function Home() {
               <div className="px-6 py-8">
                 <h3 className="text-2xl font-bold text-gray-900 text-center">Single Session</h3>
                 <div className="mt-4 flex justify-center">
-                  <span className="text-4xl font-extrabold text-gray-900">$60</span>
+                  <span className="text-4xl font-extrabold text-gray-900">$20</span>
                   <span className="text-xl font-medium text-gray-700 ml-2 mt-2">/hour</span>
                 </div>
                 <ul className="mt-8 space-y-4">
@@ -474,8 +474,8 @@ export default function Home() {
               <div className="px-6 py-8 pt-12">
                 <h3 className="text-2xl font-bold text-gray-900 text-center">5-Session Package</h3>
                 <div className="mt-4 flex justify-center">
-                  <span className="text-4xl font-extrabold text-gray-900">$275</span>
-                  <span className="text-xl font-medium text-gray-700 ml-2 mt-2">($55/hour)</span>
+                  <span className="text-4xl font-extrabold text-gray-900">$90</span>
+                  <span className="text-xl font-medium text-gray-700 ml-2 mt-2">($18/hour)</span>
                 </div>
                 <ul className="mt-8 space-y-4">
                   <li className="flex items-center text-gray-700 text-lg">
@@ -518,8 +518,8 @@ export default function Home() {
               <div className="px-6 py-8">
                 <h3 className="text-2xl font-bold text-gray-900 text-center">10-Session Package</h3>
                 <div className="mt-4 flex justify-center">
-                  <span className="text-4xl font-extrabold text-gray-900">$500</span>
-                  <span className="text-xl font-medium text-gray-700 ml-2 mt-2">($50/hour)</span>
+                  <span className="text-4xl font-extrabold text-gray-900">$150</span>
+                  <span className="text-xl font-medium text-gray-700 ml-2 mt-2">($15/hour)</span>
                 </div>
                 <ul className="mt-8 space-y-4">
                   <li className="flex items-center text-gray-700 text-lg">
