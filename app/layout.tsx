@@ -1,35 +1,66 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Celeste Lehnardt | Writing Tutor",
-  description: "Professional writing tutoring for college students and young professionals. Expert guidance in academic and professional writing.",
-  keywords: ["writing tutor", "academic writing", "professional writing", "college essays", "thesis writing", "research papers"],
+  title: "Writing Excellence | Professional Writing Tutoring",
+  description: "Expert writing tutoring to help you excel in academics and professional life. Personalized sessions with a certified Master Tutor.",
+  metadataBase: new URL("https://tutor-website-inky.vercel.app"),
+  openGraph: {
+    title: "Writing Excellence | Professional Writing Tutoring",
+    description: "Expert writing tutoring to help you excel in academics and professional life. Personalized sessions with a certified Master Tutor.",
+    url: "https://tutor-website-inky.vercel.app",
+    siteName: "Writing Excellence",
+    images: [
+      {
+        url: "/celeste-hor.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Writing Excellence - Professional Writing Tutoring",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Writing Excellence | Professional Writing Tutoring",
+    description: "Expert writing tutoring to help you excel in academics and professional life. Personalized sessions with a certified Master Tutor.",
+    images: ["/celeste-hor.jpeg"],
+  },
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "32x32",
+        type: "image/x-icon",
+      },
+      {
+        url: "/icon.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: "/apple-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
