@@ -453,7 +453,7 @@ export default function Home() {
               </div>
               <div className="px-6 pb-8">
                 <button 
-                  onClick={() => redirectToCheckout('price_1Qq7MbFHkU07xuakTb54abdw')}
+                  onClick={() => redirectToCheckout('price_1Qq8C7FHkU07xuakrzH4k9T8')}
                   className="w-full bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition-colors"
                 >
                   Book Now
@@ -500,7 +500,7 @@ export default function Home() {
               </div>
               <div className="px-6 pb-8">
                 <button 
-                  onClick={() => redirectToCheckout('price_1Qq7NOFHkU07xuakMWgnEOg6')}
+                  onClick={() => redirectToCheckout('price_1Qq8DAFHkU07xuakFwEhzFTO')}
                   className="w-full bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition-colors"
                 >
                   Get Started
@@ -550,7 +550,7 @@ export default function Home() {
               </div>
               <div className="px-6 pb-8">
                 <button 
-                  onClick={() => redirectToCheckout('price_1Qq7PwFHkU07xuak8ZirNNnC')}
+                  onClick={() => redirectToCheckout('price_1Qq8ERFHkU07xuakFtsQ6wpS')}
                   className="w-full bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition-colors"
                 >
                   Get Started
