@@ -1,31 +1,44 @@
 'use client';
-
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Add useEffect to set scroll-behavior on mount
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900">
       {/* Navigation */}
-      <nav className="bg-white/10 backdrop-blur-md fixed w-full z-50">
+      <nav className="bg-gray-900/95 backdrop-blur-md fixed w-full z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
-              <span className="text-2xl font-bold text-white">Writing Excellence</span>
+              <span 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+                className="text-2xl font-bold text-white cursor-pointer hover:text-blue-200 transition-colors"
+              >
+                Writing Excellence
+              </span>
             </div>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#about" className="text-white hover:text-blue-200 transition-colors">About</a>
-              <a href="#services" className="text-white hover:text-blue-200 transition-colors">Services</a>
-              <a href="#testimonials" className="text-white hover:text-blue-200 transition-colors">Testimonials</a>
-              <a href="#pricing" className="text-white hover:text-blue-200 transition-colors">Pricing</a>
+              <a href="#about" className="text-gray-300 hover:text-white transition-colors">About</a>
+              <a href="#services" className="text-gray-300 hover:text-white transition-colors">Services</a>
+              <a href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Testimonials</a>
+              <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
               <a 
                 href="#contact" 
-                className="bg-white text-blue-900 px-4 py-2 rounded-full font-medium hover:bg-blue-50 transition-colors"
+                className="bg-blue-500 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-600 transition-colors"
               >
                 Book a Session
               </a>
@@ -35,7 +48,7 @@ export default function Home() {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-white p-2"
+                className="text-gray-300 hover:text-white p-2"
               >
                 {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
               </button>
@@ -45,13 +58,13 @@ export default function Home() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white/10 backdrop-blur-md">
+          <div className="md:hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-800">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a href="#about" className="block px-3 py-2 text-white hover:bg-white/20 rounded-md">About</a>
-              <a href="#services" className="block px-3 py-2 text-white hover:bg-white/20 rounded-md">Services</a>
-              <a href="#testimonials" className="block px-3 py-2 text-white hover:bg-white/20 rounded-md">Testimonials</a>
-              <a href="#pricing" className="block px-3 py-2 text-white hover:bg-white/20 rounded-md">Pricing</a>
-              <a href="#contact" className="block px-3 py-2 bg-white text-blue-900 rounded-md font-medium">Book a Session</a>
+              <a href="#about" className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md">About</a>
+              <a href="#services" className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md">Services</a>
+              <a href="#testimonials" className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md">Testimonials</a>
+              <a href="#pricing" className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md">Pricing</a>
+              <a href="#contact" className="block px-3 py-2 bg-blue-500 text-white rounded-md font-medium hover:bg-blue-600">Book a Session</a>
             </div>
           </div>
         )}
@@ -92,12 +105,6 @@ export default function Home() {
                 >
                   Book Your Session
                 </a>
-                <a 
-                  href="#services" 
-                  className="inline-flex items-center px-8 py-3 text-lg font-semibold text-white border-2 border-white rounded-full hover:bg-white/10 transition-colors"
-                >
-                  Learn More
-                </a>
               </motion.div>
             </motion.div>
 
@@ -107,11 +114,14 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <div className="aspect-w-5 aspect-h-6 rounded-lg overflow-hidden bg-white/10 backdrop-blur-md p-6">
-                <img
-                  src="/profile.jpg"
+              <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                <Image
+                  src="/celeste-hor.jpeg"
                   alt="Celeste Lehnardt"
-                  className="object-cover rounded-lg"
+                  className="object-cover object-[center_20%]"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
                 />
               </div>
             </motion.div>
@@ -120,74 +130,127 @@ export default function Home() {
       </div>
 
       {/* About Section */}
-      <div className="py-16 bg-white overflow-hidden">
+      <div id="about" className="py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-            <div>
-              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                Meet Your Writing Tutor
-              </h2>
-              <p className="mt-4 text-lg text-gray-500">
-                Hi, I&apos;m Celeste Lehnardt. As a recent Political Science graduate and certified Master Tutor, 
-                I&apos;m passionate about helping students and professionals enhance their writing skills to achieve academic and professional success.
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+              Meet Your Writing Tutor
+            </h2>
+            <div className="mt-4 text-xl text-gray-500 space-y-4">
+              <p>
+                Hi, I&apos;m Celeste Lehnardt, a certified Master Tutor with a passion for helping students and professionals unlock their writing potential.
               </p>
-              <div className="mt-8 space-y-4">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                      📚
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">Academic Excellence</h3>
-                    <p className="mt-2 text-base text-gray-500">
-                      Political Science degree graduate with experience as a Teaching Assistant
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                      🎓
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">Certified Expertise</h3>
-                    <p className="mt-2 text-base text-gray-500">
-                      CRLA Master Tutor certification and experience managing other tutors
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                      ✍️
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">Personalized Approach</h3>
-                    <p className="mt-2 text-base text-gray-500">
-                      Patient, supportive, and adaptable teaching style tailored to your needs
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <p>
+                With a Political Science degree and extensive experience in academic writing, I specialize in transforming complex ideas into clear, compelling prose.
+              </p>
             </div>
-            <div className="mt-10 lg:mt-0">
-              <div className="aspect-w-6 aspect-h-5 rounded-lg overflow-hidden sm:aspect-w-16 sm:aspect-h-9">
-                <div className="bg-gray-100 p-8 rounded-lg text-center">
-                  <p className="text-lg font-medium text-gray-900">
-                    [Profile Image Placeholder]
-                  </p>
-                </div>
+          </div>
+
+          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+            <motion.div 
+              className="relative bg-white p-8 border-t-4 border-t-blue-500 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="absolute top-0 right-0 w-24 h-24">
+                <div className="absolute top-0 right-0 w-full h-full border-r-2 border-t-2 border-blue-500/20 rounded-tr-2xl"></div>
               </div>
-            </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Academic Excellence</h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Political Science degree with honors</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Experience as hand-selected Teaching Assistant</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Specialized in research methodology and academic writing</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div 
+              className="relative bg-white p-8 border-t-4 border-t-blue-500 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <div className="absolute top-0 right-0 w-24 h-24">
+                <div className="absolute top-0 right-0 w-full h-full border-r-2 border-t-2 border-blue-500/20 rounded-tr-2xl"></div>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Certified Expertise</h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>CRLA Master Tutor certification</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Trained and managed team of writing tutors</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Ongoing professional development in writing pedagogy</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div 
+              className="relative bg-white p-8 border-t-4 border-t-blue-500 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <div className="absolute top-0 right-0 w-24 h-24">
+                <div className="absolute top-0 right-0 w-full h-full border-r-2 border-t-2 border-blue-500/20 rounded-tr-2xl"></div>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Teaching Philosophy</h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Personalized learning strategies for each student</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Focus on building long-term writing skills</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Patient, supportive, and encouraging approach</span>
+                </li>
+              </ul>
+            </motion.div>
           </div>
         </div>
       </div>
 
       {/* Services Section */}
-      <div className="py-16 bg-gray-50">
+      <div id="services" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -295,8 +358,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* New Testimonials Section */}
-      <div className="py-16 bg-gray-900 text-white">
+      {/* Testimonials Section */}
+      <div id="testimonials" className="py-16 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-extrabold sm:text-4xl">
@@ -353,8 +416,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* New Pricing Section */}
-      <div className="py-16 bg-white">
+      {/* Pricing Section */}
+      <div id="pricing" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl mb-4">
@@ -377,17 +440,17 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-gray-900 text-center">Single Session</h3>
                 <div className="mt-4 flex justify-center">
                   <span className="text-4xl font-extrabold text-gray-900">$60</span>
-                  <span className="text-xl font-medium text-gray-500 ml-2 mt-2">/hour</span>
+                  <span className="text-xl font-medium text-gray-700 ml-2 mt-2">/hour</span>
                 </div>
-                <ul className="mt-6 space-y-4">
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <ul className="mt-8 space-y-4">
+                  <li className="flex items-center text-gray-700 text-lg">
+                    <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     One-on-one tutoring
                   </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li className="flex items-center text-gray-700 text-lg">
+                    <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     Flexible scheduling
@@ -415,23 +478,23 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-gray-900 text-center">5-Session Package</h3>
                 <div className="mt-4 flex justify-center">
                   <span className="text-4xl font-extrabold text-gray-900">$275</span>
-                  <span className="text-xl font-medium text-gray-500 ml-2 mt-2">($55/hour)</span>
+                  <span className="text-xl font-medium text-gray-700 ml-2 mt-2">($55/hour)</span>
                 </div>
-                <ul className="mt-6 space-y-4">
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <ul className="mt-8 space-y-4">
+                  <li className="flex items-center text-gray-700 text-lg">
+                    <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     5 hours of tutoring
                   </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li className="flex items-center text-gray-700 text-lg">
+                    <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     Progress tracking
                   </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li className="flex items-center text-gray-700 text-lg">
+                    <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     Email support
@@ -456,29 +519,29 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-gray-900 text-center">10-Session Package</h3>
                 <div className="mt-4 flex justify-center">
                   <span className="text-4xl font-extrabold text-gray-900">$500</span>
-                  <span className="text-xl font-medium text-gray-500 ml-2 mt-2">($50/hour)</span>
+                  <span className="text-xl font-medium text-gray-700 ml-2 mt-2">($50/hour)</span>
                 </div>
-                <ul className="mt-6 space-y-4">
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <ul className="mt-8 space-y-4">
+                  <li className="flex items-center text-gray-700 text-lg">
+                    <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     10 hours of tutoring
                   </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li className="flex items-center text-gray-700 text-lg">
+                    <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     Comprehensive planning
                   </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li className="flex items-center text-gray-700 text-lg">
+                    <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     Priority scheduling
                   </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li className="flex items-center text-gray-700 text-lg">
+                    <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     24/7 email support
