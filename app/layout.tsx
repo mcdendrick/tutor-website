@@ -30,27 +30,6 @@ export const metadata: Metadata = {
     description: "Expert writing tutoring to help you excel in academics and professional life. Personalized sessions with a certified Master Tutor.",
     images: ["/celeste-hor.jpeg"],
   },
-  icons: {
-    icon: [
-      {
-        url: "/favicon.ico",
-        sizes: "32x32",
-        type: "image/x-icon",
-      },
-      {
-        url: "/icon.png",
-        sizes: "192x192",
-        type: "image/png",
-      },
-    ],
-    apple: [
-      {
-        url: "/apple-icon.png",
-        sizes: "180x180",
-        type: "image/png",
-      },
-    ],
-  },
 };
 
 export default function RootLayout({
@@ -60,6 +39,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
