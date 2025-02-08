@@ -9,6 +9,11 @@ if (!process.env.NEXT_PUBLIC_DOMAIN) {
   throw new Error('Missing NEXT_PUBLIC_DOMAIN environment variable');
 }
 
+// Ensure domain has https:// prefix
+const domain = process.env.NEXT_PUBLIC_DOMAIN.startsWith('http') 
+  ? process.env.NEXT_PUBLIC_DOMAIN 
+  : `https://${process.env.NEXT_PUBLIC_DOMAIN}`;
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2025-01-27.acacia',
   typescript: true,
@@ -29,7 +34,7 @@ export async function POST(request: Request) {
     // Log the configuration being used
     console.log({
       priceId,
-      domain: process.env.NEXT_PUBLIC_DOMAIN,
+      domain,
       stripeMode: process.env.STRIPE_SECRET_KEY?.startsWith('sk_live_') ? 'live' : 'test'
     });
 
@@ -51,8 +56,8 @@ export async function POST(request: Request) {
           message: 'We will contact you after your payment to schedule your session(s).',
         },
       },
-      success_url: `${process.env.NEXT_PUBLIC_DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}`,
+      success_url: `${domain}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${domain}`,
     });
 
     console.log('Session created successfully:', { sessionId: session.id, url: session.url });
